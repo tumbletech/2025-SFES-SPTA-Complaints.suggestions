@@ -108,45 +108,8 @@
 
   <script>
     const WEBHOOK_URL = "https://hook.eu2.make.com/se9e21x7ilhavntq4o942ff1ylaqiubi"; // <-- replace with your n8n webhook URL
+    <input type="text" name="company" id="company" class="d-none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-    const form = document.getElementById("feedbackForm");
-    const msg = document.getElementById("formMsg");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      if (!form.checkValidity()) {
-        e.stopPropagation();
-        form.classList.add("was-validated");
-        return;
-      }
-
-      msg.textContent = "Submitting…";
-      msg.className = "mt-3 small text-muted";
-
-      try {
-        const data = new FormData(form);
-
-        // Optional: add a timestamp
-        data.append("submittedAt", new Date().toISOString());
-
-        const res = await fetch(WEBHOOK_URL, {
-          method: "POST",
-          body: data
-        });
-
-        if (!res.ok) throw new Error("Network response was not ok");
-
-        form.reset();
-        form.classList.remove("was-validated");
-        msg.textContent = "✅ Thank you! Your submission has been received.";
-        msg.className = "mt-3 small text-success";
-      } catch (err) {
-        msg.textContent = "❌ Submission failed. Please try again later.";
-        msg.className = "mt-3 small text-danger";
-        console.error(err);
-      }
-    });
-  </script>
 </body>
 </html>
             
